@@ -24,7 +24,7 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href={% url "inicio" %}>Inicio</a>
-                <a class="navbar-brand" href={% url "Template2" %}>Probando</a>
+                <a class="navbar-brand" href={% url "crear_auto" %}>Crear Auto</a>
                 <!-- <a class="btn btn-primary" href="#signup">Sign Up</a> -->
             </div>
         </nav>
@@ -48,6 +48,9 @@
         </header>
         {% endblock header %}
     
+        <main>
+            {% block main %}{% endblock main %}
+        </main>
 
         <!-- Footer-->
         <footer class="footer bg-light">

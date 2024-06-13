@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block tittle_head %}
+Crear Auto
+{% endblock tittle_head %}
+
+
+{% block h1_header %}
+Se creo el Auto
+{% endblock h1_header %}
+
+
+{% block main %}
+
+<form action="{% url "crear_auto" %}">
+
+    <p>
+        Marca:
+        <input type="text">
+    </p>
+
+    <p>
+        Modelo:
+        <input type="text">
+    </p>
+
+    <button>Enviar</button>
+
+</form>
+
+{% endblock main %}
+
+

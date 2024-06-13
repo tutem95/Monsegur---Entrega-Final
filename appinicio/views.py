@@ -25,7 +25,8 @@ def template2 (request, nombre, apellido):
 
     return render (request, 'template2.html',datos)
 
-def crear_auto(request, marca, modelo):
-    auto = Auto(marca=marca, modelo=modelo)
-    auto.save()
-    return render(request, 'auto_templates/creacion.html', {"auto": auto})
+def crear_auto(request):
+    
+    print(request)
+    
+    return render(request, 'appinicio/creacion.html')
