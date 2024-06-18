@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import datetime
 from django.template import Template, Context, loader
 from appinicio.models import Auto
+from appinicio.forms import CrearAutoFormulario
 
 fecha = datetime.now()
 
@@ -27,6 +28,25 @@ def template2 (request, nombre, apellido):
 
 def crear_auto(request):
     
-    print(request)
+    print('Valor de la request: ' , request)
+    print('Valor de GET: ' , request.GET)
+    print('Valor de POST: ' , request.POST)
     
-    return render(request, 'appinicio/creacion.html')
+    if request.method == 'POST':
+        formulario = CrearAutoFormulario(request.POST)
+        if formulario.is_valid():
+            datos = formulario.cleaned_data
+            auto = Auto(marca=datos.get('marca'),modelo=datos.get('modelo'))
+            auto.save()
+            return redirect('autos')
+        
+    formulario = CrearAutoFormulario(request.POST)
+    return render(request, 'appinicio/creacion.html', {'formulario': formulario})
+
+
+def autos(request):
+    
+    autos = Auto.objects.all()
+    
+    return render(request, 'appinicio/autos.html', {'autos': autos})
+

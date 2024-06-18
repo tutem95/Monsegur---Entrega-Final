@@ -12,17 +12,10 @@ Se creo el Auto
 
 {% block main %}
 
-<form action="{% url "crear_auto" %}">
+<form action={% url "crear_auto" %} method="POST">
+    {% csrf_token %}
 
-    <p>
-        Marca:
-        <input type="text">
-    </p>
-
-    <p>
-        Modelo:
-        <input type="text">
-    </p>
+    {{formulario}}
 
     <button>Enviar</button>
 
