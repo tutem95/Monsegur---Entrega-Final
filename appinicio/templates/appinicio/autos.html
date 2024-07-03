@@ -12,6 +12,8 @@ Listado de Autos
 
 {% block main %}
 
+<a href={% url "crear_auto" %}>Crear Auto</a>
+
 <form action="{% url "autos" %}" method="get">
     {{formulario}}
     <input type="submit" value="Buscar">
@@ -20,7 +22,11 @@ Listado de Autos
 {% if autos %}
 <ul>
     {% for auto in  autos%}
-    <li>{{auto}} | <a href={% url "eliminar_auto" auto.id%}>Eliminar</a></li>
+    <li>{{auto}} | 
+        <a href={% url "ver_auto" auto.id%}>Ver</a> |
+        <a href={% url "editar_auto" auto.id%}>Editar</a> | 
+        <a href={% url "eliminar_auto" auto.id%}>Eliminar</a> |
+    </li>
     {% endfor %}
 </ul>
 {% else %}

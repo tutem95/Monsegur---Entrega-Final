@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from django.template import Template, Context, loader
 from appinicio.models import Auto
-from appinicio.forms import CrearAutoFormulario, BuscarAuto
+from appinicio.forms import CrearAutoFormulario, BuscarAuto, EditarAutoFormulario
 
 fecha = datetime.now()
 
@@ -59,3 +59,25 @@ def eliminar_auto(request, id):
     auto = Auto.objects.get(id=id)
     auto.delete()
     return redirect('autos')
+
+def editar_auto(request, id):
+    auto = Auto.objects.get(id=id)
+    
+    formulario = EditarAutoFormulario(initial={'marca': auto.marca,'modelo': auto.modelo})
+    
+    if request.method == 'POST':
+        formulario = EditarAutoFormulario(request.POST)
+        if formulario.is_valid():
+            info = formulario.cleaned_data
+            
+            auto.marca = info ['marca']
+            auto.modelo = info ['modelo']
+            
+            auto.save()
+            return redirect('autos')
+    
+    return render(request, 'appinicio/editar_auto.html', {'formulario':formulario, 'auto':auto})
+    
+def ver_auto(request, id):
+    auto = Auto.objects.get(id=id)
+    return render(request, 'appinicio/ver_auto.html', {'auto':auto})

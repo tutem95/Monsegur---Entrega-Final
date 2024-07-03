@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block tittle_head %}
+Editar Auto
+{% endblock tittle_head %}
+
+
+{% block h1_header %}
+Editando a {{auto}}
+{% endblock h1_header %}
+
+
+{% block main %}
+
+<form action={% url "editar_auto" auto.id %} method="POST">
+    {% csrf_token %}
+
+    {{formulario}}
+
+    <button>Enviar</button>
+
+</form>
+
+{% endblock main %}
+
+
