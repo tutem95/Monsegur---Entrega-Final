@@ -6,19 +6,22 @@ Autos
 
 
 {% block h1_header %}
-Listado de Autos
+Autos
 {% endblock h1_header %}
 
 
 {% block main %}
-
-<a href={% url "crear_auto" %}>Crear Auto</a>
-
+<br>
+<form action="{% url "crear_auto" %}" method="get">
+    <h4><b><input type="submit" value="Crear auto nuevo"></b></h4>
+</form>
+<br>
 <form action="{% url "autos" %}" method="get">
-    {{formulario}}
+    <b>{{formulario}}</b>
     <input type="submit" value="Buscar">
 </form>
-
+<br>
+<b><h5>Listado de Autos</h5></b>
 {% if autos %}
 <ul>
     {% for auto in  autos%}

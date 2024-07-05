@@ -8,8 +8,10 @@ from appinicio.forms import CrearAutoFormulario, BuscarAuto, EditarAutoFormulari
 fecha = datetime.now()
 
 def inicio(request):
-    # return HttpResponse ('Bienvenidos a mi inico')
     return render(request, 'appinicio/index.html')
+
+def aboutme(request):
+    return render(request, 'appinicio/aboutme.html')
 
 def template1(request, nombre, apellido):
     return HttpResponse(f'<h1>Mi Template 1</h1> -- Fecha: {fecha} -- Buenas {nombre} {apellido}')
