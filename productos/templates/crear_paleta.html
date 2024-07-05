@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block tittle_head %}
+Crear Paleta
+{% endblock tittle_head %}
+
+
+{% block h1_header %}
+Se creo la Paleta
+{% endblock h1_header %}
+
+
+{% block main %}
+
+<form action={% url "crear_paleta" %} method="POST">
+    {% csrf_token %}
+
+    {{form}}
+
+    <button>Enviar</button>
+
+</form>
+
+{% endblock main %}
+
+

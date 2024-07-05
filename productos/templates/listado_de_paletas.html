@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block tittle_head %}
+Paletas
+{% endblock tittle_head %}
+
+
+{% block h1_header %}
+Listado de Paletas
+{% endblock h1_header %}
+
+
+{% block main %}
+
+<a href="{% url "crear_paleta" %}"></a>
+
+{% if paletas %}
+<ul>
+    {% for paleta in  paletas%}
+    <li>{{paleta}} | 
+     
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>
+    No hay paletas creadas
+</p>
+{% endif %}
+{% endblock main %}
+
+

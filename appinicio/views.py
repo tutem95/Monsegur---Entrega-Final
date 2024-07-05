@@ -81,3 +81,6 @@ def editar_auto(request, id):
 def ver_auto(request, id):
     auto = Auto.objects.get(id=id)
     return render(request, 'appinicio/ver_auto.html', {'auto':auto})
+
+
+#1.20
