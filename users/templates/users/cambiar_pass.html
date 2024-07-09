@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block tittle_head %}
+Cambiar Password
+{% endblock tittle_head %}
+
+{% block h1_header %}
+Cambiar Password
+{% endblock h1_header %}
+
+
+{% block main %}
+
+<form action={% url "cambiar_pass" %} method="POST">
+    {% csrf_token %}
+
+    <b>{{form}}</b>
+
+    <button>Cambiar</button>
+
+</form>
+
+{% endblock main %}

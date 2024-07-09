@@ -4,6 +4,8 @@ from datetime import datetime
 from django.template import Template, Context, loader
 from appinicio.models import Auto
 from appinicio.forms import CrearAutoFormulario, BuscarAuto, EditarAutoFormulario
+from django.contrib.auth.decorators import login_required
+
 
 fecha = datetime.now()
 
@@ -56,12 +58,13 @@ def autos(request):
     
     return render(request, 'appinicio/autos.html', {'autos': autos, 'formulario': formulario})
 
-
+@login_required
 def eliminar_auto(request, id):
     auto = Auto.objects.get(id=id)
     auto.delete()
     return redirect('autos')
 
+@login_required
 def editar_auto(request, id):
     auto = Auto.objects.get(id=id)
     
