@@ -28,7 +28,12 @@
                 
                 {% if  request.user.is_authenticated%}
 
-                <a class="navbar-brand" href={% url "editar_perfil" %}><b>{{request.user.username}}</b></a>
+                <a class="navbar-brand" href={% url "editar_perfil" %}>
+                    
+                    <img src={{request.user.datosextra.avatar.url}} alt="Avatar" height="60px">
+                    <b>{{request.user.username}}</b>
+
+                </a>
                     <form action={% url "logout" %} method="POST">
                         {% csrf_token %}
                         <button><b>Cerrar Sesion</b></button>

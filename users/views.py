@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
+from users.models import DatosExtra
 
 def login(request):
     
@@ -20,6 +21,8 @@ def login(request):
           user = authenticate(username=username, password=password)
           
           django_login(request, user)
+          
+          DatosExtra.objects.get_or_create()
           
           return redirect('inicio')
     
@@ -40,11 +43,16 @@ def registro(request):
 @login_required
 def editar_perfil(request):
     
-    formulario = EditarPerfil(instance=request.user)
+    formulario = EditarPerfil(initial={'avatar': request.user.datosextra.avatar}, instance=request.user)
     
     if request.method == 'POST':
-        formulario = EditarPerfil(request.POST, instance=request.user)
+        formulario = EditarPerfil(request.POST, request.FILES ,instance=request.user)
         if formulario.is_valid():
+            
+            avatar = formulario.cleaned_data.get('avatar')
+            request.user.datosextra.avatar = avatar
+            request.user.datosextra.save()
+            
             formulario.save()
             return redirect('editar_perfil')
     
@@ -56,3 +64,6 @@ class CambiarPass(LoginRequiredMixin, PasswordChangeView):
     template_name = 'users/cambiar_pass.html'
     success_url = reverse_lazy('editar_perfil')
     
+    
+
+#Clase 25 - 21'
