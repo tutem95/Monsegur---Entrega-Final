@@ -28,6 +28,7 @@ def login(request):
     
     return render(request, 'users/login.html', {'formulario': formulario})
 
+
 def registro(request):
     
     formulario = NuestroFormulario()
@@ -40,24 +41,25 @@ def registro(request):
     
     return render(request, 'users/registro.html', {'formulario': formulario})
 
+
 @login_required
 def editar_perfil(request):
     
-    formulario = EditarPerfil(initial={'avatar': request.user.datosextra.avatar}, instance=request.user)
+    datosextra = request.user.datosextra
+    formulario = EditarPerfil(initial={'avatar': datosextra.avatar}, instance=request.user)
     
     if request.method == 'POST':
         formulario = EditarPerfil(request.POST, request.FILES ,instance=request.user)
         if formulario.is_valid():
             
-            avatar = formulario.cleaned_data.get('avatar')
-            request.user.datosextra.avatar = avatar
-            request.user.datosextra.save()
+            datosextra.avatar = formulario.cleaned_data.get('avatar')
+            datosextra.save()
             
             formulario.save()
             return redirect('editar_perfil')
     
-
     return render(request, 'users/editar_perfil.html',{'formulario': formulario})
+
 
 
 class CambiarPass(LoginRequiredMixin, PasswordChangeView):
@@ -65,5 +67,3 @@ class CambiarPass(LoginRequiredMixin, PasswordChangeView):
     success_url = reverse_lazy('editar_perfil')
     
     
-
-#Clase 25 - 21'

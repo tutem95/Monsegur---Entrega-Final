@@ -12,7 +12,7 @@ Editando a {{auto}}
 
 {% block main %}
 
-<form action={% url "editar_auto" auto.id %} method="POST">
+<form action={% url "editar_auto" auto.id %} method="POST" enctype='multipart/form-data'>
     {% csrf_token %}
 
     {{formulario}}

@@ -68,15 +68,17 @@ def eliminar_auto(request, id):
 def editar_auto(request, id):
     auto = Auto.objects.get(id=id)
     
-    formulario = EditarAutoFormulario(initial={'marca': auto.marca,'modelo': auto.modelo})
+    formulario = EditarAutoFormulario(initial={'marca': auto.marca,'modelo': auto.modelo, 'anio': auto.anio, 'imgauto': auto.imgauto})
     
     if request.method == 'POST':
-        formulario = EditarAutoFormulario(request.POST)
+        formulario = EditarAutoFormulario(request.POST, request.FILES)
         if formulario.is_valid():
             info = formulario.cleaned_data
             
             auto.marca = info ['marca']
             auto.modelo = info ['modelo']
+            auto.anio = info ['anio']
+            auto.imgauto = info ['imgauto']
             
             auto.save()
             return redirect('autos')
@@ -87,5 +89,3 @@ def ver_auto(request, id):
     auto = Auto.objects.get(id=id)
     return render(request, 'appinicio/ver_auto.html', {'auto':auto})
 
-
-#1.20

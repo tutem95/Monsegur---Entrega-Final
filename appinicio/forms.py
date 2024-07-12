@@ -3,6 +3,9 @@ from django import forms
 class AutoFormularioBase(forms.Form):
     marca = forms.CharField(max_length=20)
     modelo = forms.CharField(max_length=20)
+    anio = forms.IntegerField()
+    imgauto = forms.ImageField(required=False)
+    
     
 class CrearAutoFormulario(AutoFormularioBase):
     ...
