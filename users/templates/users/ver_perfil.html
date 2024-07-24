@@ -1,0 +1,26 @@
+{% extends "base.html" %} 
+
+{% block tittle_head %}
+User
+{% endblock tittle_head %}
+
+{% block h1_header %}
+{{name}}
+{% endblock h1_header %}
+
+{% block main %}
+<ul>
+    <a href={% url "editar_perfil" %}>Editar Perfil</a>
+    <br>
+    <li><b>Nombre:</b> {{user.first_name}}</li>
+    <li><b>Apellido:</b> {{user.last_name}}</li>
+    <li><b>Mail:</b> {{user.email}}</li>
+    <br>
+    {% if request.user.datosextra.avatar %}
+        <img src={{request.user.datosextra.avatar.url}} alt="Avatar" height="500px">
+    {% endif %}
+
+    
+
+</ul>
+{% endblock main %}

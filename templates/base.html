@@ -29,7 +29,7 @@
                 
                 <a class="navbar-brand" href={% url "autos" %}><b>Autos</b></a>
 
-                <a class="navbar-brand" href={% url "editar_perfil" %}>
+                <a class="navbar-brand" href={% url "ver_perfil" %}>
                     {% if request.user.datosextra.avatar %}
                     <img src={{request.user.datosextra.avatar.url}} alt="Avatar" height="60px">
                     {% endif %}    

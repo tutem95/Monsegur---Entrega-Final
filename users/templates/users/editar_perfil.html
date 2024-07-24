@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block tittle_head %}
-Editar Perfil
+Perfil
 {% endblock tittle_head %}
 
 {% block h1_header %}
-Editar Perfil
+{{user}}
 {% endblock h1_header %}
 
 
@@ -14,7 +14,7 @@ Editar Perfil
 <form action={% url "editar_perfil" %} method="POST" enctype= 'multipart/form-data'>
     {% csrf_token %}
     <b>{{formulario}}</b>
-    <button>Actualizar</button>
+    <button>Editar</button>
 </form>
 
 <a href={% url "cambiar_pass" %}>Cambiar Password</a>
